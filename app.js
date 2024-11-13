@@ -18,6 +18,11 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+//API Endpoint
+app.get('/api/key', (req, res) => {
+  res.json({key: process.env.GOOGLE_FACT_CHECK_API_KEY});
+});
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

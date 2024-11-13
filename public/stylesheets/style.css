@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     line-height: 1.6;
     color: #333;
 }
@@ -63,17 +63,39 @@ body {
 }
 
 .hero .info {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   opacity: 0.9;
+  margin-bottom: 2rem;
 }
+.fc-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: #e74c3c;
+  color: white;
+  text-decoration: none;
+  border-radius: 35px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.fc-button:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
 
 /* Info Boxes Section */
 .info-boxes {
   display: flex;
   justify-content: space-around;
-  padding: 2rem;
+  padding: 4rem 2rem;
   background-color: #f9f9f9;
   margin-top: -2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .box {
@@ -95,10 +117,229 @@ body {
 .box h2 {
   font-size: 1.5rem;
   color: #2c3e50;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .box p {
   font-size: 1rem;
-  color: #555;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+
+.box-link {
+  display: inline-block;
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+/* Why Combat Misinformation Section */
+.why-combat {
+  padding: 4rem 2rem;
+  background-color: #ffffff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.why-combat h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.why-combat .icon {
+  width: 200px;
+  height: auto;
+  margin-right: 1rem;
+}
+.why-combat p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.why-combat h3 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.why-combat ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  text-align: left;
+  display: inline-block;
+}
+
+.why-combat li {
+  font-size: 1rem;
+  color: #666;
+  margin: 0.5rem 0;
+}
+
+
+
+
+
+/* Footer */
+footer {
+  background-color: #194f85;
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+/* Main Content */
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+}
+
+/* Tips Section */
+.tips {
+  display: grid;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.tip {
+  background-color: #f0f8ff;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.tip-content{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tip h2 {
+  color: #2c3e50;
+}
+
+.tip-image {
+  width: 80px;
+  height: auto;
+}
+
+/* Conclusion */
+.conclusion {
+  text-align: center;
+  margin-top: 2rem;
+  font-weight: bold;
+}
+
+.fact-checking-tool {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.fact-checking-tool h2 {
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+/* Form */
+#fact-check-form {
+  margin: 2rem 0;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #27ae60;
+}
+
+/* Results */
+.result {
+  display: none;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 4px;
+  border-left: 4px solid #3498db;
+}
+
+.result.error {
+  border-left-color: #e74c3c;
+}
+
+.loading {
+  display: none;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+      gap: 1rem;
+  }
+}
+
+.guidance-box {
+  background-color: #f1f9ff;
+  border-left: 4px solid #3498db;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+}
+
+.guidance-box h3 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.example-list {
+  list-style: none;
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.example-list li {
+  position: relative;
+  margin: 0.3rem 0;
+}
+
+.example-list li:before {
+  content: "•";
+  color: #3498db;
+  font-weight: bold;
+  position: absolute;
+  left: -1rem;
 }

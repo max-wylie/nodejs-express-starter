@@ -25,5 +25,106 @@
     <h1>Fact Checking Tools</h1>
     <p class="info">Find out if your statement is true or not...</p>
     </header>
-  </body>
+
+    <main class="content">
+      <section class="fact-checking-tool">
+          <h2>Check Your Facts</h2>
+
+          <div class="guidance-box">
+            <h3>What Works Best?</h3>
+            <p>This fact-checker works best with:</p>
+            <ul class="example-list">
+                <li>Political statements and claims</li>
+                <li>Public figures' quotes</li>
+                <li>Viral news and social media claims</li>
+                <li>Statistical claims about current events</li>
+            </ul>
+            <p><small>For best results, try to enter complete statements rather than general topics or questions.</small></p>
+            </div>
+
+          <p>Type a statement below to verify:</p>
+          
+          <form id="fact-check-form">
+              <input type="text" 
+                     id="statement" 
+                     name="statement" 
+                     placeholder="Example: 'The unemployment rate in 2023 was the lowest in 50 years'" 
+                     required>
+              <button type="submit">Check Fact</button>
+          </form>
+
+          <div class="loading" id="loading">
+              Checking facts...
+          </div>
+
+          <div id="result" class="result"></div>
+      </section>
+  </main>
+
+  <script>
+      document.getElementById("fact-check-form").addEventListener("submit", async function(event) {
+          event.preventDefault();
+          
+          const statement = document.getElementById("statement").value;
+          const resultDiv = document.getElementById("result");
+          const loadingDiv = document.getElementById("loading");
+
+          // Show loading state
+          loadingDiv.style.display = "block";
+          resultDiv.style.display = "none";
+
+          try {
+              //Get API Key from app.js
+              const keyResponse = await fetch('/api/key');
+              const { key } = await keyResponse.json();
+
+              const url = `https://factchecktools.googleapis.com/v1alpha1/claims:search?query=${encodeURIComponent(statement)}&key=${key}`;
+              const response = await fetch(url);
+              
+              if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              
+              const data = await response.json();
+
+              resultDiv.classList.remove("error");
+              
+              if (data && data.claims && data.claims.length > 0) {
+                  const claim = data.claims[0];
+                  
+                  resultDiv.innerHTML = `
+                      <h3>Fact Check Results</h3>
+                      <p><strong>Claim:</strong> ${claim.text}</p>
+                      ${claim.claimant ? `<p><strong>Claimed By:</strong> ${claim.claimant}</p>` : ''}
+                      <p><strong>Rating:</strong> ${claim.claimReview[0].textualRating}</p>
+                      ${claim.claimReview[0].url ? `<p><strong>Source:</strong> <a href="${claim.claimReview[0].url}" target="_blank">Read full fact check</a></p>` : ''}
+                  `;
+              } else {
+                  resultDiv.innerHTML = `
+                      <h3>No Results Found</h3>
+                      <p>No fact-check information was found for this statement. This doesn't mean the statement is true or false, just that it hasn't been fact-checked by our sources yet.</p>
+                  `;
+              }
+          } catch (error) {
+              console.error("API request error:", error);
+              resultDiv.classList.add("error");
+              resultDiv.innerHTML = `
+                  <h3>Error</h3>
+                  <p>Sorry, we encountered an error while checking the facts. Please try again later.</p>
+              `;
+          } finally {
+              loadingDiv.style.display = "none";
+              resultDiv.style.display = "block";
+          }
+      });
+  </script>
+  
+<footer>
+    <div class="footer-content">
+        <p>© 2024 Combat Fake Info. All rights reserved.</p>
+    </div>
+  </footer>
+  
+
+</body>
 </html>
